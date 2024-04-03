@@ -1,1 +1,5 @@
 numpy==1.21.0
+pandas
+time
+datetime
+statistics
