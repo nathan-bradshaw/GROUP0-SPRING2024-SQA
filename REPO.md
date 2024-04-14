@@ -37,6 +37,7 @@ What we learned:
 1. Using minidom to parse untrusted XML data is known to be vulnerable to XML attacks. Replace minidom with the equivalent defusedxml package, or make sure defusedxml.defuse_stdlib() is called.
 
 - To ensure our code base cannot be attacked or used maliciously, we would need to address these concerns and use more secure processes to run the desired code
+- Git hooks can be used to ensure that everytime new code is commited, we can track and identify new security issues that need to be addressed
 
 
 
