@@ -53,5 +53,10 @@ What we learned:
 
 # 4: Integrated CI with GitHub Actions:
 # WHAT WE DID
+What we did:
+- We created a continuous integration .yaml file that is triggered by pushes to the main branch
+- Defined a single job called "build" that which runs on the latest version of ubuntu
+- The steps include a checkout of the repository, an installation of project dependencies, and an execution of any tests
+
 # RESULTS
 # WHAT WE LEARNED
