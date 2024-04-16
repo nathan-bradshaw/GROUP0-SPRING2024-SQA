@@ -52,11 +52,61 @@ What we learned:
 # WHAT WE LEARNED
 
 # 4: Integrated CI with GitHub Actions:
-# WHAT WE DID
 What we did:
 - We created a continuous integration .yaml file that is triggered by pushes to the main branch
 - Defined a single job called "build" that which runs on the latest version of ubuntu
-- The steps include a checkout of the repository, an installation of project dependencies, and an execution of any tests
+- The steps include a checkout of the repository and an installation of project dependencies
 
-# RESULTS
-# WHAT WE LEARNED
+Results:
+- The build successfully runs and the following run details are output in actions:
+
+- Checkout Repository
+1. Run actions/checkout@v2
+1. Syncing repository: nathan-bradshaw/GROUP0-SPRING2024-SQA
+1. Getting Git version info
+1. Temporarily overriding HOME='/home/runner/work/_temp/91278238-ff76-434a-9396-c0352ba508fe' before making global git config changes
+1. Adding repository directory to the temporary git global config as a safe directory
+1. /usr/bin/git config --global --add safe.directory /home/runner/work/GROUP0-SPRING2024-SQA/GROUP0-SPRING2024-SQA
+1. Deleting the contents of '/home/runner/work/GROUP0-SPRING2024-SQA/GROUP0-SPRING2024-SQA'
+1. Initializing the repository
+1. Disabling automatic garbage collection
+1. Setting up auth
+1. Fetching the repository
+1. Determining the checkout info
+1. Checking out the ref
+1. /usr/bin/git log -1 --format='%H'
+1. 'cceb79cf90b8e5a103dd5cadb3e20294f5fbb063'
+
+- Set up Python
+1. Run actions/setup-python@v2
+1. Successfully setup CPython (3.12.2)
+
+- Install Dependencies
+1. Run python -m pip install --upgrade pip
+1. Requirement already satisfied: pip in /opt/hostedtoolcache/Python/3.12.2/x64/lib/python3.12/site-packages (24.0)
+
+- Post Set up Python
+1. Post job cleanup.
+
+- Post Checkout Repository
+1. Post job cleanup.
+1. /usr/bin/git version
+1. git version 2.43.2
+1. Temporarily overriding HOME='/home/runner/work/_temp/f7f78543-b06c-43c2-a9e2-1473001b9d38' before making global git config changes
+1. Adding repository directory to the temporary git global config as a safe directory
+1. /usr/bin/git config --global --add safe.directory /home/runner/work/GROUP0-SPRING2024-SQA/GROUP0-SPRING2024-SQA
+1. /usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+1. /usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+1. /usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+1. http.https://github.com/.extraheader
+1. /usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+1. /usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+
+-Complete Job
+1. Clean up orphan processes
+
+What We Learned
+- We gained an understanding of how to integrate CI workflows with YAML files 
+- Learned how to perform common tasks such as fetching code from the repository and setting up your local environment
+- Learned how to utilize the actions tab of GitHub to monitor different configurations
+- Overall, we learned how to automate certain processes for our project using CI with GitHub Actions that lead to more efficiency and reliability
