@@ -42,9 +42,75 @@ What we learned:
 
 
 # 2: Created a Fuzz file to Fuzz 5 methods:
-# WHAT WE DID
-# RESULTS
-# WHAT WE LEARNED
+## What we did:
+- We selected 5 methods from the MLForensics-farzana repository to implement fuzz testing in order to find bugs and vulnerabilities.
+- We created a python script named fuzz.py in our repository in order to automate the testing with invalid inputs and to print the exceptions.
+
+1. deleteRepo(dirName, type_): Inputs - `None`, Empty string (''), Nonexistent directory name ('nonexistent_dir')
+2. dumpContentIntoFile(strP, fileP): Inputs - 'test' (content) and `None`, 'test' (content) and Empty string ('') (file path)
+3. makeChunks(the_list, size_): Inputs - List `[1, 2, 3]` (the_list) and Size 0 (size_)
+4. cloneRepo(repo_name, target_dir): Inputs - `None`, Empty string (''), 'invalid_repo_name' (repo_name) and 'target' (target_dir)
+5. checkPythonFile(path2dir): Inputs - `None`, Empty string (''), Nonexistent directory ('nonexistent_dir')
+
+- We set up GitHub Actions to run fuzz.py automatically when there is a push into the main branch. 
+
+fuzz.yml:
+name: Fuzz Testing
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  fuzz:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.10'
+
+    - name: Run fuzz.py
+      run: python fuzz.py
+
+
+## Results:
+- The GitHub is able to correctly run fuzz.py and here are is the output:
+
+-> Run python fuzz.py
+fatal: repository 'target' does not exist
+fatal: repository 'invalid_repo_name' does not exist
+:::INVALID_DIRECTORY_NAME:::Deleting  None
+:::EMPTY_DIRECTORY_NAME:::Deleting  
+:::NONEXISTENT_DIRECTORY:::Deleting  nonexistent_dir
+Skipping this repo ... trouble cloning repo: 
+Skipping this repo ... trouble cloning repo: invalid_repo_name
+
+Crashes:
+deleteRepo: TypeError: stat: path should be string, bytes, os.PathLike or integer, not NoneType
+dumpContentIntoFile: TypeError: expected str, bytes or os.PathLike object, not NoneType
+dumpContentIntoFile: FileNotFoundError: [Errno 2] No such file or directory: ''
+makeChunks: ValueError: range() arg 3 must not be zero
+cloneRepo: TypeError: can only concatenate str (not "NoneType") to str
+checkPythonFile: TypeError: expected str, bytes or os.PathLike object, not NoneType
+
+## What we learned
+1. Repository Existence Verification: Encountered fatal errors when attempting to clone repositories 'target' and 'invalid_repo_name' that did not exist.
+2. Handling of Invalid Directory Names: Detected and handled cases where invalid directory names (None, empty string, nonexistent directories) were provided as inputs.
+3. Error Handling in File Operations: Discovered errors in file operations, such as writing content to files with invalid paths (resulting in FileNotFoundError) and passing None as the file path.
+4. Encountered a TypeError when attempting to concatenate a NoneType object to a string during repository cloning.
+5. Chunk Size Handling: Encountered a ValueError when attempting to create chunks with an invalid size (0), indicating a flaw in the chunking mechanism.
+6. Python File Content Verification: Detected TypeError instances when passing invalid directory names to the function responsible for checking Python file content, highlighting the need for robust directory input handling.
+
+Lessons:
+1. We identified vulnerabilities, errors, and crashes within the project's codebase through fuzz testing
+2. We recommend improvements to enhance the robustness, reliability, and security of the project
+3. We recognize the importance of implementing robust error handling mechanisms and improving input validation to prevent unexpected issues during execution
 
 # 3: Integrated forensics by modifying 5 methods:
 # WHAT WE DID
