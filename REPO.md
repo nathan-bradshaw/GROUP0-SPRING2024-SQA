@@ -1,14 +1,14 @@
 # Applied Techniques:
 
 # 1: Git Hooks for reporting all security weaknesses upon any commit:
-What we did:
+## What we did:
 - Created a git hook named pre-commit which runs everytime the user attempts to commit to github
 - Edited that hook to run bandit security checks recursivelly on all files
 - We then output that security report to security_report.csv in our repository and inform the user that security vulnerabilities were found
 - We also created a script to install the hooks on a new github repo user's machine due to the fact that hooks are not tracked in repositories
 - That pre-commit hook can be found in the git_hooks folder, and the script is called setup-hooks-sh
 
-Results:
+## Results:
 - We successfully created a hook to report bandit vulnerabilities upon commiting 
 - Our bandit output includes the following issues:
 1. blacklist : empirical/dataset.stats.py line 12
@@ -24,7 +24,7 @@ Results:
 1. start_process_with_partial_path : mining/mining.py line 81
 1. subprocess_without_shell_equals_true : mining/mining.py line 81
 
-What we learned:
+## What we learned:
 - We learned that a few of our files have security issues that need to be addressed:
 1. empirical/dataset.stats.py
 1. mining/git.repo.miner.py
@@ -107,23 +107,35 @@ checkPythonFile: TypeError: expected str, bytes or os.PathLike object, not NoneT
 5. Chunk Size Handling: Encountered a ValueError when attempting to create chunks with an invalid size (0), indicating a flaw in the chunking mechanism.
 6. Python File Content Verification: Detected TypeError instances when passing invalid directory names to the function responsible for checking Python file content, highlighting the need for robust directory input handling.
 
-Lessons:
+## Lessons:
 1. We identified vulnerabilities, errors, and crashes within the project's codebase through fuzz testing
 2. We recommend improvements to enhance the robustness, reliability, and security of the project
 3. We recognize the importance of implementing robust error handling mechanisms and improving input validation to prevent unexpected issues during execution
 
 # 3: Integrated forensics by modifying 5 methods:
-# WHAT WE DID
-# RESULTS
-# WHAT WE LEARNED
+## What we did:
+1. Added a file called myLogger.py to the repository.
+2. Used the method giveMeLoggingObject to integrate forensics in the following 5 methods:
+    * runFameML in main.py
+    * getCSVData in main.py
+    * dumpContentIntoFile in mining.py
+    * reportDensity in report.py
+    * reportProp in report.py
+
+## What we learned:
+- Learned how to make use of logging in order to conduct software forensics in python code.
+- Gained experience using the standard python logging library.
+- Achieved a general understanding of logging levels and how they can be used to control the verbosity of logging output.
+- Discovered the importance of including contextual information such as timestamps and method names in log messages.
+- Appreciated the role of logging in providing a historical record of events and actions within the software.
 
 # 4: Integrated CI with GitHub Actions:
-What we did:
+## What we did:
 - We created a continuous integration .yaml file that is triggered by pushes to the main branch
 - Defined a single job called "build" that which runs on the latest version of ubuntu
 - The steps include a checkout of the repository and an installation of project dependencies
 
-Results:
+## Results:
 - The build successfully runs and the following run details are output in actions:
 
 - Checkout Repository
@@ -171,7 +183,7 @@ Results:
 -Complete Job
 1. Clean up orphan processes
 
-What We Learned
+## What We Learned
 - We gained an understanding of how to integrate CI workflows with YAML files 
 - Learned how to perform common tasks such as fetching code from the repository and setting up your local environment
 - Learned how to utilize the actions tab of GitHub to monitor different configurations

@@ -13,6 +13,7 @@ import pandas as pd
 import py_parser 
 import numpy as np 
 
+import myLogger
 
 def giveTimeStamp():
   tsObj = time.time()
@@ -21,6 +22,9 @@ def giveTimeStamp():
   
 
 def getCSVData(dic_, dir_repo):
+	logObj  = myLogger.giveMeLoggingObject()
+	logObj.info("Begin loading csv data")
+
 	temp_list = []
 	for TEST_ML_SCRIPT in dic_:
 		# print(constants.ANALYZING_KW + TEST_ML_SCRIPT) 
@@ -133,7 +137,8 @@ def getCSVData(dic_, dir_repo):
   				  model_label_count, model_output_count, data_pipeline_count, environment_count, state_observe_count, total_event_count )
 
 		temp_list.append( the_tup )
-		# print('='*25)
+		
+		logObj.info("Finished loading csv data")
 	return temp_list
   
   
@@ -150,6 +155,9 @@ def getAllPythonFilesinRepo(path2dir):
 
 
 def runFameML(inp_dir, csv_fil):
+	logObj  = myLogger.giveMeLoggingObject()
+	logObj.info("runFameML started.")
+
 	output_event_dict = {}
 	df_list = [] 
 	list_subfolders_with_paths = [f.path for f in os.scandir(inp_dir) if f.is_dir()]
@@ -164,6 +172,8 @@ def runFameML(inp_dir, csv_fil):
 	full_df = pd.DataFrame( df_list ) 
 	# print(full_df.head())
 	full_df.to_csv(csv_fil, header= constants.CSV_HEADER, index=False, encoding= constants.UTF_ENCODING)     
+	
+	logObj.info("runFameML completed.")
 	return output_event_dict
 
 

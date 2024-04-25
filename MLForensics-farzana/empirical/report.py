@@ -10,6 +10,7 @@ import time
 import datetime 
 import statistics
 
+import myLogger
 
 def giveTimeStamp():
   tsObj = time.time()
@@ -27,17 +28,24 @@ def reportProp( res_file ):
     fields2explore = ['DATA_LOAD_COUNT', 'MODEL_LOAD_COUNT', 'DATA_DOWNLOAD_COUNT',	'MODEL_LABEL_COUNT', 'MODEL_OUTPUT_COUNT',	
                       'DATA_PIPELINE_COUNT', 'ENVIRONMENT_COUNT', 'STATE_OBSERVE_COUNT',  'TOTAL_EVENT_COUNT'
                      ]
-                     
+
+    logObj  = myLogger.giveMeLoggingObject()
+    logObj.info("Prop report for file {res_file}:\n")
+
     for field in fields2explore:
         field_res_list = res_df[res_df['CATEGORY'] == field ]   
         prop_val_list = field_res_list['PROP_VAL'].tolist() 
         print(prop_val_list)
-        average_prop_metric = Average(prop_val_list)        
-        print('CATEGORY:{}, AVG_PROP_VAL:{}'.format( field, average_prop_metric  ))
+        average_prop_metric = Average(prop_val_list)    
+        average_prop_str = 'CATEGORY:{}, AVG_PROP_VAL:{}'.format( field, average_prop_metric  )
+        print(average_prop_str)
         print('-'*50)     
-        median_prop_metric = Median(prop_val_list)        
-        print('CATEGORY:{}, MEDIAN_PROP_VAL:{}'.format( field, median_prop_metric  ))
+        median_prop_metric = Median(prop_val_list)
+        median_prop_str = 'CATEGORY:{}, MEDIAN_PROP_VAL:{}'.format( field, median_prop_metric  )
+        print(median_prop_str)
         print('-'*50)          
+
+        logObj.info(f"{average_prop_str} \n {median_prop_str} \n")
     
     
 def reportDensity( res_file ):
@@ -45,16 +53,23 @@ def reportDensity( res_file ):
     fields2explore = ['DATA_LOAD_COUNT', 'MODEL_LOAD_COUNT', 'DATA_DOWNLOAD_COUNT',	'MODEL_LABEL_COUNT', 'MODEL_OUTPUT_COUNT',	
                       'DATA_PIPELINE_COUNT', 'ENVIRONMENT_COUNT', 'STATE_OBSERVE_COUNT',  'TOTAL_EVENT_COUNT'
                      ]
-                     
+
+    logObj  = myLogger.giveMeLoggingObject()
+    logObj.info("Density report for file {res_file}:\n")
+
     for field in fields2explore:
         field_res_list = res_df[res_df['CATEGORY'] == field ]   
         density_val_list = field_res_list['EVENT_DENSITY'].tolist() 
-        average_density_metric = Average(density_val_list)        
-        print('CATEGORY:{}, AVG_PROP_VAL:{}'.format( field, average_density_metric  ))
+        average_density_metric = Average(density_val_list)
+        average_prop_str = 'CATEGORY:{}, AVG_PROP_VAL:{}'.format( field, average_density_metric  )
+        print(average_prop_str)
         print('-'*50)     
         median_density_metric = Median(density_val_list)        
-        print('CATEGORY:{}, MEDIAN_PROP_VAL:{}'.format( field, median_density_metric  ))
+        median_prop_str = 'CATEGORY:{}, MEDIAN_PROP_VAL:{}'.format( field, median_density_metric  )
+        print(median_prop_str)
         print('-'*50) 
+
+        logObj.info(f"{average_prop_str} \n {median_prop_str} \n")
         
             
 if __name__=='__main__': 

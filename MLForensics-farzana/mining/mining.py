@@ -10,6 +10,8 @@ import shutil
 from git import Repo
 from git import exc 
 
+import myLogger
+
 
 def giveTimeStamp():
   tsObj = time.time()
@@ -30,6 +32,8 @@ def dumpContentIntoFile(strP, fileP):
     fileToWrite = open( fileP, 'w')
     fileToWrite.write(strP )
     fileToWrite.close()
+    logObj  = myLogger.giveMeLoggingObject()
+    logObj.info(f"contents dumped into file {fileP}")
     return str(os.stat(fileP).st_size)
   
   
