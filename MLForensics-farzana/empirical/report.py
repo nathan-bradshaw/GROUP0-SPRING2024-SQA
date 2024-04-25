@@ -30,7 +30,7 @@ def reportProp( res_file ):
                      ]
 
     logObj  = myLogger.giveMeLoggingObject()
-    logObj.info("Prop report for file {res_file}:\n")
+    logObj.info(f"Prop report for file {res_file}:\n")
 
     for field in fields2explore:
         field_res_list = res_df[res_df['CATEGORY'] == field ]   
@@ -55,7 +55,7 @@ def reportDensity( res_file ):
                      ]
 
     logObj  = myLogger.giveMeLoggingObject()
-    logObj.info("Density report for file {res_file}:\n")
+    logObj.info(f"Density report for file {res_file}:\n")
 
     for field in fields2explore:
         field_res_list = res_df[res_df['CATEGORY'] == field ]   

@@ -121,6 +121,10 @@ checkPythonFile: TypeError: expected str, bytes or os.PathLike object, not NoneT
     * dumpContentIntoFile in mining.py
     * reportDensity in report.py
     * reportProp in report.py
+3. Ran the above methods in order to write logging messages to the SIMPLE-LOGGER.log files
+
+## Results
+The 3 log files generated from the 5 altered methods can be found in the empirical, FAME-ML, and mining directories. The log is called SIMPLE-LOGGER in each.
 
 ## What we learned:
 - Learned how to make use of logging in order to conduct software forensics in python code.
