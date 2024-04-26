@@ -24,6 +24,9 @@
 1. start_process_with_partial_path : mining/mining.py line 81
 1. subprocess_without_shell_equals_true : mining/mining.py line 81
 
+Screenshot:
+![screenshot](static_analysis_bandit.png)
+
 ## What we learned:
 - We learned that a few of our files have security issues that need to be addressed:
 1. empirical/dataset.stats.py
@@ -99,6 +102,9 @@ makeChunks: ValueError: range() arg 3 must not be zero
 cloneRepo: TypeError: can only concatenate str (not "NoneType") to str
 checkPythonFile: TypeError: expected str, bytes or os.PathLike object, not NoneType
 
+Screenshot:
+![screenshot](fuzz.png)
+
 ## What we learned
 1. Repository Existence Verification: Encountered fatal errors when attempting to clone repositories 'target' and 'invalid_repo_name' that did not exist.
 2. Handling of Invalid Directory Names: Detected and handled cases where invalid directory names (None, empty string, nonexistent directories) were provided as inputs.
@@ -125,6 +131,10 @@ checkPythonFile: TypeError: expected str, bytes or os.PathLike object, not NoneT
 
 ## Results
 The 3 log files generated from the 5 altered methods can be found in the empirical, FAME-ML, and mining directories. The log is called SIMPLE-LOGGER in each.
+
+Screenshot:
+![screenshot](forensics_logger.png)
+
 
 ## What we learned:
 - Learned how to make use of logging in order to conduct software forensics in python code.
